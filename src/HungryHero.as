@@ -4,6 +4,8 @@ package
 	
 	import net.hires.debug.Stats;
 	
+	import screens.InGame;
+	
 	import starling.core.Starling;
 	
 	[SWF(frameRate="60", width="800", height="600", backgroundcolor="0x333333")]

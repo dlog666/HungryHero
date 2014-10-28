@@ -34,22 +34,22 @@ package screens
 			bg = new Image(Assets.getTexture("BgWelcome"));
 			this.addChild(bg);
 			
-			title = new Image(Assets.getTexture("WelcomeTitle"));
+			title = new Image(Assets.getAtlas().getTexture("welcome_title"));
 			title.x = 440;
 			title.y = 20;
 			this.addChild(title);
 			
-			hero = new Image(Assets.getTexture("WelcomeHero"));
+			hero = new Image(Assets.getAtlas().getTexture("welcome_hero"));
 			hero.x = -hero.width;
 			hero.y = 100;
 			this.addChild(hero);
 			
-			playBtn = new Button(Assets.getTexture("WelcomePlayBtn"));
+			playBtn = new Button(Assets.getAtlas().getTexture("welcome_playButton"));
 			playBtn.x = 500;
 			playBtn.y = 260;
 			this.addChild(playBtn);
 			
-			aboutBtn = new Button(Assets.getTexture("WelcomeAboutBtn"));
+			aboutBtn = new Button(Assets.getAtlas().getTexture("welcome_aboutButton"));
 			aboutBtn.x = 410;
 			aboutBtn.y = 380;
 			this.addChild(aboutBtn);
