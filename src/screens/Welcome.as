@@ -2,6 +2,8 @@ package screens
 {
 	import com.greensock.TweenLite;
 	
+	import events.NavigationEvent;
+	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -53,6 +55,17 @@ package screens
 			aboutBtn.x = 410;
 			aboutBtn.y = 380;
 			this.addChild(aboutBtn);
+			
+			this.addEventListener(Event.TRIGGERED, onMainMenuClick);
+		}
+		
+		private function onMainMenuClick(event:Event):void
+		{
+			var buttonClicked:Button = event.target as Button;
+			if((buttonClicked as Button) == playBtn)
+			{
+				this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN, {id: "play"}, true));
+			}
 		}
 		
 		public function initialize():void
