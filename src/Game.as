@@ -40,6 +40,8 @@ package
 			switch (event.params.id)
 			{
 				case "play":
+					screenWelcome.disposeTemporarily();
+					screenInGame.initialize();
 					break;
 			}
 		}
