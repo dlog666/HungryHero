@@ -20,6 +20,9 @@ package screens
 		private var elapsed:Number;
 		
 		private var gameState:String;
+		private var playerSpeed:Number;
+		private var hitObstacle:Number = 0;
+		private const MIN_SPEED:Number = 650;
 		
 		public function InGame()
 		{
@@ -36,7 +39,6 @@ package screens
 		private function drawGame():void
 		{
 			bg = new GameBackground();
-			bg.speed = 50;
 			this.addChild(bg);
 			
 			hero = new Hero();
@@ -65,6 +67,54 @@ package screens
 			hero.y = stage.stageHeight * 0.5;
 			
 			gameState = "idle";
+			
+			playerSpeed = 0;
+			hitObstacle = 0;
+			
+			bg.speed = 0;
+			
+			startButton.addEventListener(Event.TRIGGERED, onStartButtonClick);
+		}
+		
+		private function onStartButtonClick(event:Event):void
+		{
+			startButton.visible = false;
+			startButton.removeEventListener(Event.TRIGGERED, onStartButtonClick);
+			
+			launchHero();
+		}
+		
+		private function launchHero():void
+		{
+			this.addEventListener(Event.ENTER_FRAME, onGameTick);
+		}
+		
+		private function onGameTick(event:Event):void
+		{
+			switch(gameState)
+			{
+				case "idle":
+					//Take Off
+					if (hero.x < stage.stageWidth * 0.5 * 0.5)
+					{
+						hero.x += ((stage.stageWidth * 0.5 * 0.5 + 10) - hero.x) * 0.05;
+						hero.y = stage.stageHeight * 0.5;
+						
+						playerSpeed += (MIN_SPEED - playerSpeed) * 0.05;
+						bg.speed = playerSpeed * elapsed;
+					}
+					else
+					{
+						gameState = "flying";
+					}
+					break;
+				case "flying":
+					playerSpeed -= (playerSpeed - MIN_SPEED) * 0.01;
+					bg.speed = playerSpeed * elapsed;
+					break;
+				case "over":
+					break;
+			}
 		}
 		
 		private function checkElapsed(event:Event):void
